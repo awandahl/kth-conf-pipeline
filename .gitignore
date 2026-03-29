@@ -12,3 +12,5 @@ old/
 venv/
 .venv/
 *.bk
+*.csv
+kth_metadata.duckdb
