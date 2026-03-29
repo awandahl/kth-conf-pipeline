@@ -15,3 +15,18 @@ conf_order: edition/order number.
 conf_concat: display string combining name, place, and dates.
 
 note: parser note or explanation.
+
+```
+{
+    "conf_name": "",
+    "conf_place": "",
+    "conf_dates": "",
+    "conf_start_date": "",
+    "conf_end_date": "",
+    "conf_code": "",
+    "conf_order": "",
+    "conf_concat": "",
+    "note": "",
+}
+```
+
