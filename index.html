@@ -463,6 +463,12 @@
     note: document.getElementById('f-note'),
   };
 
+  const coreKeys = [
+    'conf_name','conf_place','conf_dates',
+    'conf_start_date','conf_end_date',
+    'conf_code','conf_order','conf_concat','note'
+  ];
+
   let history = [];
   let showJson = false;
 
@@ -483,12 +489,6 @@
   }
 
   function renderResult(result){
-    const coreKeys = [
-      'conf_name','conf_place','conf_dates',
-      'conf_start_date','conf_end_date',
-      'conf_code','conf_order','conf_concat','note'
-    ];
-
     coreKeys.forEach(k=>{
       const el = fields[k];
       if (!el) return;
@@ -496,7 +496,20 @@
       el.textContent = v.trim() ? v : '—';
     });
 
-    jsonView.textContent = JSON.stringify(result || {}, null, 2);
+    // Build ordered JSON object for display
+    const ordered = {};
+    coreKeys.forEach(k => {
+      ordered[k] = result && result[k] != null ? result[k] : "";
+    });
+    if (result && typeof result === 'object') {
+      Object.keys(result).forEach(k => {
+        if (!(k in ordered)) {
+          ordered[k] = result[k];
+        }
+      });
+    }
+
+    jsonView.textContent = JSON.stringify(ordered, null, 2);
     jsonView.style.display = showJson ? 'block' : 'none';
   }
 
